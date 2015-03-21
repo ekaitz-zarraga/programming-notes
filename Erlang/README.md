@@ -9,4 +9,5 @@ Introduction to Erlang based on "Learn you some Erlang for Great Good" book (Vis
     * Types and Variables
     * Operators
 * Modules
+
 More TBD
