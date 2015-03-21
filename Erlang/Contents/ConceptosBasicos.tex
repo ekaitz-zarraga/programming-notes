@@ -1,0 +1,237 @@
+\section{Conceptos básicos}
+
+En este apartado se explican los diferentes tipos de datos que tiene Erlang y la sintaxis básica del lenguaje.
+
+
+\subsection{Tipos y variables}
+
+\subsubsection{Números}
+
+Erlang dispone de soporte para números de coma flotante (float) y enteros (integer) y los alternará
+dependiendo de sus necesidades. No le importará qué tipos estés introduciendo.
+
+Para trabajar con diferentes bases (hexadecimal, octal, binario etc.): \textit{BASE\#NUMERO}.
+\begin{lstlisting}
+1> 2#111.
+7
+\end{lstlisting}
+
+\subsubsection{Variables}
+
+La primera letra siempre tendrá que ser una mayúscula o \textit{'_'}.
+
+En Erlang se puede asignar valor a las variables una sola vez. Tiene un sentido más matemático el hecho de
+asignar un valor a una variable. Si en matemáticas \textit{X=5}, \textit{X=6} no tiene sentido porque no es
+una igualdad válida. En Erlang pasa algo parecido. La primera vez se definen y a partir de ese momento el
+nombre de esa variable tendrá siempre asignado el valor.
+
+\begin{lstlisting}
+1> A=34.
+34
+2> A.
+34
+3> A=90.
+** exception error: no match of right hand side value 90
+4> 34=90.
+** exception error: no match of right hand side value 90
+\end{lstlisting}
+
+Existe una variable especial llamada \textit{'_'} que siempre se comporta como si no tuviese ningún valor
+asignado, siendo útil para descartar lo que se le asigne. Nunca se podrá recuperar un valor asignado a ella.
+
+\begin{lstlisting}
+1> _=12.
+12
+2> _.
+* 1: variable '_' is unbound
+\end{lstlisting}
+
+Para descartar el contenido de las variables, puede utilizarse la función \textit{f(Variable)} que descartará
+la asignación de la \textit{Variable} o simplemente \textit{f()} que descartará todas las asignaciones.
+
+\begin{lstlisting}
+1> A=3.
+3
+2> A.
+3
+3> f().
+ok
+4> A.
+* 1: variable 'A' is unbound
+\end{lstlisting}
+
+\subsubsection{Atoms}
+
+Los \textit{atoms} son palabras literales. Siempre empiezan por minúsculas, por eso las variables siempre
+comenzarán con una letra en mayúsculas. Los \textit{atoms} deben ser puestos entre comillas simples
+\textit{(')} cuando empiezan por mayúsculas o contienen caracteres especiales.
+
+Las palabras reservadas y las funciones son un caso concreto de \textit{atom}.
+
+Los \textit{atoms} no se liberan durante la recolección de basura. Se guardan en una tabla, por eso no deben
+cargarse de forma dinámica.
+
+\begin{lstlisting}
+1> atom.
+atom
+\end{lstlisting}
+
+
+
+\subsubsection{Tuplas}
+
+Las tuplas (\textit{tuple} en inglés) son la estructura básica para agrupar variables. Se definen entre
+llaves y se separa cada elemento con comas. Aquí empieza tomar importancia la variable anónima \textit{'_'},
+puesto que sirve para descartar partes de la tupla que no necesitemos:
+
+\begin{lstlisting}
+11> {A,B}={14,17}.
+{14,17}
+12> A.
+14
+13> {A,B,_}={14,17,19}.
+{14,17,19}
+15> {A,B}={14,17,19}.
+** exception error: no match of right hand side value {14,17,19}
+16> {celsius, X}={kelvin, 60}.
+** exception error: no match of right hand side value {kelvin,60}
+\end{lstlisting}
+
+Las tuplas pueden agrupar cualquier tipo de elemento y no todos los elementos tienen que ser del mismo tipo.
+
+\subsubsection{Listas}
+
+Las listas (\textit{list} en inglés) se definen entre corchetes.
+
+Las listas se forman por una cabeza (\textit{head}) y una cola (\textit{tail}), siendo la cabeza el primer
+elemento comenzando por la izquierda y la cola la lista formada por el resto. Las funciones \textit{hd()} y
+\textit{tl()} sirven para obtener la cabeza y la cola de una lista, respectivamente.
+
+Las listas pueden contener elementos de cualquier tipo.
+
+\begin{lstlisting}
+20> [1,2,3].
+[1,2,3]
+21> hd([1,2,3]).
+1
+22> tl([1,2,3]).
+[2,3]
+23> tl([1,2,{hola, ekaitz}]).
+[2,{hola,ekaitz}]
+\end{lstlisting}
+
+Por defecto, Erlang considera las listas como cadenas de caracteres siempre que todos los elementos de las
+mismas puedan decodificarse como caracteres. Esto suele ser un engorro.
+\begin{lstlisting}
+42> [45,46,47,89,90].
+"-./YZ"
+43> [45,46,47,89,90,1].
+[45,46,47,89,90,1]
+\end{lstlisting}
+
+
+
+\subsection{Operadores}
+
+\subsubsection{Comparaciones}
+
+Las comparaciones son las habituales de otros lenguajes de programación, pero la sintaxis no es la habitual.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|}
+Igualdad             & =:=           \\
+Desigualdad          & =/=           \\
+Igualdad numérica    & ==            \\
+Desigualdad numérica & /=            \\
+Mayor o igual que    & \textgreater= \\
+Menor que igual que  & =\textless    \\
+Mayor que	     & \textgreater  \\
+Menor que	     & \textless     \\
+\end{tabular}
+\end{table}
+
+La comparación numérica (== y /=) difiere de la comparación normal (=:= y =/=) en que, en el primer caso la
+comparación se hace a nivel de significado numérico, es decir: 5 y 5.0 son iguales, mientras que en el
+segundo caso se considerarán diferentes por tener un tipado distinto (integer vs float).
+
+Por otro lado, se pueden comparar objetos de diferentes tipos, pero el resultado será el siguiente:
+\begin{verbatim}
+number < atom < reference < fun < port < pid < tuple < list < bit string
+\end{verbatim}
+
+Nota: \textit{true} y \textit{false} son \textit{atoms} y no concuerdan con ningún valor numérico como en
+otros lenguajes. Como se puede apreciar en la lista superior, siempre serán mayores que cualquier número.
+
+\subsubsection{Operadores booleanos}
+
+Los operadores booleanos son los habituales: \textit{and}, \textit{or}, \textit{xor}, \textit{not} (como
+son \textit{atoms}, se expresan en minúsculas). Para ejecutar primero el de la izquierda y luego el de la
+derecha en función del primer resultado (\textit{short-circuit evaluation}\footnote{Consultar:
+\url{http://en.wikipedia.org/wiki/Short-circuit_evaluation}}) utilizar \textit{andalso} y \textit{orelse}.
+
+
+\subsubsection{Operadores matemáticos}
+
+Los operadores matemáticos más comunes son: \textit{+}, \textit{-}, \textit{*}, \textit{/}, \textit{div}
+(división entera) y \textit{rem} (\textit{remainder}, el resto de la división). Pueden utilizarse paréntesis
+para agrupar operaciones y cambiar su prioridad como en otros lenguajes de programación o en matemáticas.
+
+\subsubsection{Operadores para listas}
+\paragraph{Añadir y quitar elementos:} Para añadir elementos a las listas se utiliza \textit{++} y para
+retirarlos \textit{-- --}. Cuidado: Son right-associative:
+\begin{lstlisting}
+37> [1,2,3]--[1,2]++[3].
+[]
+\end{lstlisting}
+
+
+\paragraph{Operador cons:}
+El operador \textit{cons} (de constructor) se define con la pleca ($|$). Sirve tanto para hacer
+coincidir patrones o para construir listas. Su objetivo es separar la cabeza de la cola en las listas de la
+siguiente manera (\textit{[HEAD$|$TAIL]}):
+
+\begin{lstlisting}
+26> [Nombre | Apellidos] = ['Ekaitz', 'Zarraga', 'Rio'].
+['Ekaitz','Zarraga','Rio']
+27> Nombre.
+'Ekaitz'
+28> Apellidos.
+['Zarraga','Rio']
+29> [1|[2,3,4]].
+[1,2,3,4]
+\end{lstlisting}
+
+Tal y como se ha dicho antes, la cola es una lista así que, a la hora de construir listas con este operador,
+lo que se añada como cola siempre deberá ser una lista. [1$|$2] no es correcto, lo correcto sería:
+[1$|$[2,[]]] o [1,2$|$[]].
+
+\paragraph{List comprehensions:}
+Es una manera de construir listas de forma matemática del estilo de la siguiente, que construye la lista
+[3,4,5,6]:
+\begin{equation}
+\{x\: \epsilon\: \mathbb{N}, x \leq  4: y = x+2\}
+\end{equation}
+
+En Erlang funciona igual, sólo cambia la sintaxis:
+\begin{lstlisting}
+38> [2+X || X<-[1,2,3,4]].
+[3,4,5,6]
+\end{lstlisting}
+
+Pueden añadirse más condiciones:
+\begin{lstlisting}
+39> [2+X || X<-[1,2,3,4], X rem 2 =:= 0].
+[4,6]
+\end{lstlisting}
+
+\subsubsection{Operadores binarios}
+
+Erlang es un lenguaje con un soporte fuerte para valores en binario puesto que está diseñado para las
+telecomunicaciones.
+
+\paragraph{Separación de binarios:} Los datos binarios pueden colocarse entre $<<\:$  y $>>$ para dividirlos
+en secciones legibles.
+
+%% TODO TODO TODO
+

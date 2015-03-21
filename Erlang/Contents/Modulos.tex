@@ -1,0 +1,104 @@
+\section{Módulos}
+
+Un módulo (\textit{module} en inglés) es un conjunto de funciones agrupadas en un único archivo, definido con
+un nombre con la extensión \textit{.erl}.
+
+Para ejecutar funciones de un módulo concreto la sintaxis es la siguiente:
+
+\begin{verbatim}
+Modulo:Función(Argumentos).
+\end{verbatim}
+
+En el siguiente ejemplo \textit{io} sería el módulo, la función \textit{format} y los argumentos el string:
+\textit{``Hola Mundo!''}:
+\begin{lstlisting}
+77> io:format("Hola Mundo!~n").
+Hola Mundo!
+ok
+\end{lstlisting}
+
+En los módulos hay dos tipos de cosas: Funciones y Atributos.
+
+\paragraph{Los atributos} son el conjunto de metadatos que describen el módulo y se definen así:
+\begin{verbatim}
+-Nombre(Valor).
+\end{verbatim}
+
+\begin{itemize}
+  \item El atributo mínimo para un módulo es el nombre:
+    \begin{verbatim}
+    -module(NombreDelModulo).
+    \end{verbatim}
+
+  \item Para definir qué funciones serán mostradas al exterior del módulo se utiliza el atributo
+    \textit{-export()} \footnote{Aridad: En inglés \textit{arity}. En el análisis
+    matemático, la aridad de un operador matemático o de una función es el número de argumentos necesarios
+    para que dicho operador o función se pueda calcular.}:
+    \begin{verbatim}
+    -export([Función1/Aridad, Función2/Aridad...]).
+    \end{verbatim}
+
+  \item Para importar funciones de otros módulos:
+    \begin{verbatim}
+    -import(Modulo,[Función1/Aridad, Función2/Aridad...]).
+    \end{verbatim}
+
+  \item Para definir macros: \textit{-define(Nombre,Valor).} que se utilizan \textit{?Nombre}. Por ejemplo,
+  la macro \textit{-define(sub(X,Y), X-Y).} utilizada como \textit{?sub(13,5)} tomará el valor \textit{13-5}.
+\end{itemize}
+
+
+\paragraph{Las funciones} se definen de la siguiente manera:
+\begin{verbatim}
+Nombre(Argumentos)-> Cuerpo.
+\end{verbatim}
+
+\begin{itemize}
+  \item Nombre: Es un \textit{atom}, así que debe comenzar en minúsculas.
+  \item Cuerpo: Expresiones separadas por comas, la última expresión ejecutada será el valor devuelto.
+  \item Argumentos: Separados por comas.
+\end{itemize}
+
+Todos los módulos tienen (automáticamente) una función \textit{module_info/0} que muestra los metadatos del
+módulo. Para llamarla:
+\begin{lstlisting}
+modulo:module_info().
+\end{lstlisting}
+
+
+Ejemplo de módulo:
+\begin{lstlisting}
+-module(functions).
+-export([head/1,second/1]).
+
+head([H|_]) -> H.
+second([_,X|_]) -> X.
+\end{lstlisting}
+
+\subsection{Compilación}
+
+Tal y como se ha dicho antes el código fuente de Erlang debe ser compilado para la máquina virtual. Existen
+muchas formas de hacerlo:
+\begin{itemize}
+  \item Desde la shell de Erlang:
+    \begin{lstlisting}
+    1> c(modulo).
+    {ok,functions}
+    \end{lstlisting}
+    Si el módulo no se encuentra en la carpeta actual navegar usando \textit{cd(``path'').} y \textit{ls().} o
+    introducir el path hasta el archivo.
+
+  \item Desde la shell de unix:
+    \begin{lstlisting}[language=bash]
+    ekaitz@DaComputa:~$ erlc flags modulo.erl
+    \end{lstlisting}
+
+  \item Desde la shell de Erlang o desde un módulo:
+    \begin{lstlisting}
+    compile:file(modulo).
+    \end{lstlisting}
+\end{itemize}
+
+
+
+

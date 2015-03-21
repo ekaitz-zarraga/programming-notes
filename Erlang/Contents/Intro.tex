@@ -1,0 +1,57 @@
+\section{Introducción}
+
+En este apartado se introduce el funcionamiento general de Erlang, su tipado, sintaxis y filosofía general.
+
+\subsection{Funcionamiento}
+
+Erlang dispone de una máquina virtual donde se ejecutan los programas. Es parecido a lo que hace java con los
+bytecodes. Los programas hechos en Erlang tienen que ser compilados para esta máquina virtual.
+
+Los archivos de código fuente tienen la extensión '.erl', de Erlang,  y los compilados '.beam', que proviene
+de \textit{Bogdan/Björn's Erlang Abstract Machine}, el nombre de la máquina virtual. Han existido otras
+máquinas virtuales pero están en desuso.
+
+Más adelante se profundizará en la compilación.
+
+\subsection{La Shell}
+
+Erlang dispone de una shell. Sirve como emulador para poder ejecutar comandos pero también permite cosas como
+editar código en caliente etc. Para entrar: usar el comando \textit{erl}.
+
+\begin{lstlisting}
+ekaitz@DaComputa:~$ erl
+Erlang R16B03 (erts-5.10.4) [source] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+
+Eshell V5.10.4  (abort with ^G)
+1>
+\end{lstlisting}
+
+La shell está basada en Emacs, usa comandos similares [Ctrl+A] para inicio de línea, [Ctrl+E] para final de
+línea, etc.
+
+
+Como se aprecia arriba, [Ctrl+G] sirve para abortar. Una vez pulsado permite ejecutar unos comandos simples:
+
+
+\begin{lstlisting}
+1>
+User switch command
+ --> h
+  c [nn]            - connect to job
+  i [nn]            - interrupt job
+  k [nn]            - kill job
+  j                 - list all jobs
+  s [shell]         - start local shell
+  r [node [shell]]  - start remote shell
+  q                 - quit erlang
+  ? | h             - this message
+ -->
+\end{lstlisting}
+
+Para terminar las líneas introducir '.', como cuando se pone ';' en MySQL. Las expresiones pueden separarse
+por comas pero sólo se mostrará el resultado de la última.
+
+\begin{lstlisting}
+1> 2/3,3*4.
+12
+\end{lstlisting}
