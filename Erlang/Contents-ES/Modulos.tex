@@ -90,7 +90,7 @@ Tal y como se ha dicho antes el código fuente de Erlang debe ser compilado para
 muchas formas de hacerlo:
 \begin{itemize}
   \item Desde la shell de Erlang:
-    \begin{lstlisting}
+    \begin{lstlisting}[gobble=4]
     1> c(modulo).
     {ok,functions}
     \end{lstlisting}
@@ -98,12 +98,12 @@ muchas formas de hacerlo:
     introducir el path hasta el archivo.
 
   \item Desde la shell de unix:
-    \begin{lstlisting}[language=bash]
+    \begin{lstlisting}[language=bash,gobble=4]
     ekaitz@DaComputa:~$ erlc flags modulo.erl
     \end{lstlisting}
 
   \item Desde la shell de Erlang o desde un módulo:
-    \begin{lstlisting}
+    \begin{lstlisting}[gobble=4]
     compile:file(modulo).
     \end{lstlisting}
 \end{itemize}
