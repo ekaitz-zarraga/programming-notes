@@ -1,0 +1,41 @@
+\section{Funciones} \label{funciones}
+	Definición de funciones:
+	\begin{tabbing}
+	---- \= ---- \= \kill
+	\> \textit{def} nombre(arg1, arg2,...) \# \textit{definición} \\ 
+	\>\> expresiones \\
+	\>\> \textit{return} valor1, valor2 \#\textit{ devuelve el valor}
+	\end{tabbing}
+	\begin{itemize}
+	\item Las funciones son código ejecutable, pueden definirse dentro un \textit{if/for/while...} (son objetos)
+	\item Las variables dentro de una función sólo son visibles dentro de la propia función.
+	\item Los argumentos inmutables se pasan por valor y los objetos con puntero
+	\item Se pueden asignar valores a los argumentos en la propia llamada: \textit{func(a=3)}
+	\item Memoization: guardar valores conocidos de una función en un diccionario para ahorrar tiempo de cálculo
+	\end{itemize}
+
+	\subsection{Argumentos por defecto} 
+	\noindent Se pueden incluir valores por defecto en la definición de una función, por ejemplo: \textit{def} func(a,b=2,c=3). El primero requerido, si no se da el valor de los demás se utilizan los por defecto. Si se mete sólo \textit{a} $\rightarrow$ \textit{b} y \textit{c} por defecto; con \textit{a} y \textit{b} $\rightarrow$ \textit{c} por defecto; con \textit{a},\textit{b} y \textit{c}$\rightarrow$ ninguno por defecto. 
+
+	\subsection{Recepción de argumentos}
+	Hay diferentes maneras de recibir los argumentos de una función:
+	\begin{itemize}
+	\item La típica: \textit{def} func(a,b=2,c=3)
+	\item \textit{def} func(*args)$\rightarrow$ coge todos los argumentos y los mete en un tuple
+	\item \textit{def} func(**args)$\rightarrow$ coge los argumentos del tipo a=3 y los mete en un diccionario (vale para desempaquetar argumentos si se usa en la llamada a la función)
+	\item Se pueden combinar diferentes modos de recibir argumentos en el siguiente orden: a, a=3, *args, **args2 
+	\end{itemize} 
+
+	\subsection{Funciones anónimas o lambdas}
+	\noindent Sintaxis:
+	\begin{tabbing}
+	---- \= ---- \= \kill
+	\> \textit{lambda} arg1, arg2,...,argN  \\ 
+	\>\> expresión que usa los argumentos
+	\end{tabbing}
+
+	\noindent Se pueden asignar a un objeto: \textit{f = lambda x,y,z : x + y + z}\\
+	\textit{f(2,3,4)}	
+
+	\subsection{Ayuda de las funciones (docstring)} \label{docstring}
+	\noindent Línea entre comillas triples después de la definición. Es un atributo de la función. Se pide con el método \textit{función.\_\_doc\_\_} 

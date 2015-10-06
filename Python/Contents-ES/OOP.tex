@@ -1,0 +1,57 @@
+\section{OOP}
+
+	\begin{itemize}
+	\item Ver tipo de objeto: \textit{type(objeto)}
+	\item Ver los atributos de un objeto: \textit{dir(objeto)}. Con \textit{dir(\_\_builtins\_\_)} se ven las funciones y atributos que hay antes de importar ningún módulo.
+	\item Ver los métodos aplicables a un objeto \textit{objeto.\_\_methods\_\_}
+	\item Ver lo que hace un método: \textit{help(objeto.método)}
+	\end{itemize}
+	
+	\subsection{Clases}
+	\begin{itemize}
+	\item Definición de clases: \textit{class} Nombre(tipo):
+	\item Atributos: objeto.atributo = valor
+	\item Para crear una instancia de una clase: a = Nombre()
+	\item Métodos: funciones definidas dentro de una clase. Para llamarlos:
+		\begin{enumerate}
+		\item clase.método(objeto al que se le aplica\footnote{Al objeto al que se le aplica un método (lo que va antes del punto) se le llama parámetro. Al primer parámetro de un método se le llama \textit{self} por convenio})
+		\item objeto al que se le aplica.método()
+		\end{enumerate}
+	\item Hay overloading y polimorfismo
+	\end{itemize}
+
+	\subsection{Herencia}
+	\begin{itemize}
+	\item \textit{class} Hijo(Padre)
+	\item La subclase coge los métodos de la superclase
+	\item Si se vuelve a escribir un método en la subclase, overload
+	\item Admite herencia múltiple: Hijo(Padre1,Padre2,...)
+	\item Relaciones posibles entre clases:
+		\begin{itemize}
+		\item HAS-A: referencia a otros objetos
+		\item IS-A: herencia
+		\item DEPENDS-ON: cambios en una clase provocan cambios en otras
+		\end{itemize}
+	\end{itemize}
+
+	\subsection{Métodos de sobrecarga de operadores}
+	\noindent Los más comunes:
+	\begin{itemize}
+	\item Método \_\_init\_\_, para inicializar, valores por defecto. CONSTRUCTOR ($\sim$ Java)
+	\item Método \_\_del\_\_, para reclamar un objeto. DESTRUCTOR
+	\item Método \_\_add\_\_, +
+	\item Método \_\_or\_\_, | / OR
+	\item Método \_\_str\_\_, para imprimir ($\sim$ Java) 
+	\item Método \_\_call\_\_, llamada a funciones, X()	
+	\item Método \_\_getattr\_\_, x.atributo  
+	\item Método \_\_setattr\_\_, x.atributo = valor
+	\item Método \_\_getitem\_\_, para indexar, x[key] 
+	\item Método \_\_setitem\_\_, asignar valor a una posición, x[key] = valor 
+	\item Método \_\_len\_\_, longitud
+	\item Método \_\_cmp\_\_, comparación, == / $< >$ 
+ 	\item Método \_\_lt\_\_, $ < $
+	\item Método \_\_eq\_\_, ==
+	\item Método \_\_radd\_\_, suma por la derecha
+	\item Método \_\_iadd\_\_, x+
+	\item Método \_\_iter\_\_, iteraciones (bucles \textit{for}, vectorización con \textit{in}, \textit{map})    
+	\end{itemize}

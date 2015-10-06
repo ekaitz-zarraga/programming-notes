@@ -1,0 +1,124 @@
+\section{Sintaxis}
+
+	\begin{itemize}
+	\item Después de \textit{if / for / def / ...} $\rightarrow$ :
+	\item Final de línea = final de expresión. Para dividir una sentencia en varias líneas: $\backslash$. Las siguientes líneas se pueden indentar de $\forall$ manera. (Las expresiones entre corchetes/llaves/paréntesis también pueden ocupar varias líneas sin  $\backslash$)  
+	\item Final de indentación \footnote{Cualquier indentación es válida mientras sea coherente en todo el bloque} = final de bloque 
+	\end{itemize}
+
+	\subsection{Condiciones: \textit{if - elif - else}}
+	\noindent Sintaxis:
+	\begin{tabbing}
+    ---- \= ---- \= \kill
+	\> \textit{if} condición:\\
+	\>\> expresión1 \\
+	\>\> expresión2 \\ \\
+	\>\textit{elif} condición: \\
+	\>\> expresión alternativa1 \\
+	\> \textit{else}: \\
+	\>\> expresión alternativa2 
+	\end{tabbing}
+
+	\begin{itemize}
+	\item Si sólo tiene una condición puede hacerse en una única línea: \textit{if} condición: expresión 	
+	\item No hay \textit{case}, se usan diccionarios
+	\item Sintaxis alternativa: \textit{A = Y if X else Z}\footnote{Y ? X : Z de C y Java} equivale a:
+	\begin{tabbing}
+    ---- \= ---- \= \kill
+	\> \textit{if} X:\\
+	\>\> A = Y\\
+	\> \textit{else}: \\
+	\>\> A = Z
+	\end{tabbing}
+
+	\end{itemize} 
+
+	\subsection{Bucles}
+		
+	\noindent Para parar un bucle $\rightarrow$ Ctrl + C
+
+		\subsubsection{Bucles \textit{for}}
+		\noindent Sintaxis:
+		\begin{tabbing}
+		---- \= ---- \= \kill		
+		\> \textit{for} contador \textit{in} objeto : \\
+		\>\> expresiones \\
+		\> \textit{else}: \\
+		\>\> expresiones
+		\end{tabbing}
+
+		\begin{itemize}
+		\item Se puede iterar en strings, listas, tuples ...
+		\item Se le pueden poner \textit{break}s y \textit{continue}s (ver \ref{while})
+		\item Se puede vectorizar en lugar de usar bucles \textit{for} para ganar velocidad. Ejemplo:
+			\begin{enumerate}
+			\item \textit{cuadrados = [x**2 for x in [1, 2, 3, 4]]}(puede anidarse un \textit{if})
+			\item \textit{cuadrados = [] \# lista vacía}     
+			\begin{tabbing} % Indentación
+         	---- \= ---- \= \kill  % Definición
+			\textit{for} x \textit{in} [1,2,3,4]:\\
+			\>\textit{cuadrados.append(x**2)}  % \> para que indente; \>\> indenta al segundo nivel
+			\end{tabbing}
+			\end{enumerate}	
+		\end{itemize}
+
+		\subsubsection{Bucles \textit{while}}\label{while}
+		\noindent Sintaxis:
+		\begin{tabbing}
+	    ---- \= ---- \= \kill
+		\> \textit{while} condición:\\
+		\>\> expresión1 \\
+		\>\> expresión2 \\ \\
+		\>\textit{try}: (como un \textit{try - catch} de Java)\\
+		\>\textit{except}: \\
+		\>\> maneja error 
+		\end{tabbing}
+
+		\noindent Excepciones dentro del while:
+
+		\begin{tabbing}
+	    ---- \= ---- \= \kill
+		\> \textit{while} condición1:\\
+		\>\> expresiones \\
+		\>\textit{if} condición2 : \textit{break \# sale del while, no ejecuta else}\\
+		\>\textit{if} condición3 : \textit{continue \# vuelve al while}\\
+		\> else: \\
+		\>\> expresiones \# \textit{ejecuta si no ha ejecuta un break} 
+		\end{tabbing}
+
+		\subsubsection{Bucles \textit{do while}}
+		\begin{itemize}
+		\item No hay bucles \textit{do while}
+		\item Para hacer un equivalente a un \textit{do while}
+		\begin{tabbing}
+	    ---- \= ---- \= \kill
+		\> \textit{while} True:\\
+		\>\> expresiones \\
+		\>\> \textit{if} exitTest() : break \\
+		\end{tabbing}
+		\end{itemize}
+
+	\subsection{Operadores}
+
+	\begin{itemize}
+	\item \textbf{Suma} $\rightarrow$ + , funciona como suma para el caso de los números y como concatenación para los strings y listas (L = [1,2] $\rightarrow$ L = L +[3] $\rightarrow$ L = [1,2,3])
+
+	\item \textbf{Multiplicación} $\rightarrow$ * , multiplicación entre números y repetición para listas y strings. Ej: 'Spam'*3 $\rightarrow$ 'SpamSpamSpam'
+
+	\item \textbf{División} $\rightarrow$ /, división entera entre int (truncando \footnote{Para que divida normal entre dos enteros .0 o hacer un cast}) y división entre cualquier combinación float - int.
+
+	\item \textbf{Módulo} $\rightarrow$ \%, el resto en una división entera
+
+	\item \textbf{Exponente} $\rightarrow$ **
+
+	\item \textbf{Slice} $\rightarrow$ objeto[\textit{desde donde:paso: hasta donde}]. No coge el último elemento. Si el último número es negativo va hacia atrás. \footnote{A[:] coge todos los elementos}
+
+	\item \textbf{Cast}: convertir un tipo de objetos en otro. En entero: \textit{int(dato)}. En real: \textit{float(dato)}. En string: str(dato). En lista: list(tuple). En tuple: tuple(lista). 
+
+	\item Operador \textbf{in}: \textit{if} x \textit{in} y. Devuelve True si x pertenece a y. Ejemplos: 
+		\begin{itemize}
+		\item\textit{'m' in 'Spam'} $\rightarrow$ True
+		\item Para leer un fichero: \textit{for} line \textit{in} \textit{open('file.txt')}:
+		\item Para iterar en un diccionario: \textit{for} key \textit{in} \textit{D.keys()}: o \textit{for} key \textit{in} D :
+		\end{itemize}
+	\end{itemize}

@@ -1,0 +1,29 @@
+\section{Métodos interesantes}\label{metodos}
+
+	\begin{itemize}
+	\item range(inicio, fin, paso) $\rightarrow$ devuelve una lista. Puede usarse en bucles \textit{for}: \textit{for} i \textit{in} range(3): \# \textit{para repetir 3 veces}
+	\item len(lista) $\rightarrow$ devuelve la longitud de una lista
+	\item sorted(lista) $\rightarrow$ ordena y devuelve lista ordenda
+	\item sum(lista) $\rightarrow$ suma los elementos
+	\item any(lista) $\rightarrow$ True si hay algún elemento no vacío
+	\item all(lista) $\rightarrow$ True si TODOS no vacíos
+	\item zip(lista1, lista2) $\rightarrow$ junta el primer elemento de lista1 y el de lista2 en un tuple, el segundo con el segundo etc. Por ejemplo:
+
+	\textit{lista1 = [1,2,3,4]\\
+	lista2 = [5,6,7,8]\\
+	zip(lista1, lista2) \# queda [(1,5),(2,6),(3,7),(4,8)]}
+		\begin{itemize}
+		\item Funciona con listas y strings
+		\item Vale para hacer diccionarios
+		\item Para acción paralela: \textit{for}(x,y) \textit{in} zip(lista1, lista2) 
+		\end{itemize}
+	\item enumerate(lista)$\rightarrow$ [(nº,valor),(nº,valor),...], enumera todos los elementos de una lista
+	\item filter(secuencia)$\rightarrow$ aplica una condición a una secuencia y devuelve los objetos para los que es True
+	\item map(función, secuencia)$\rightarrow$ aplica una función a una secuencia de objetos. Ej:
+
+	\textit{def} inc(x): \textit{return} x + 10 \\
+	\textit{map(inc,counters) \# suma 10 a todos los elementos de counters}
+
+	\item is $\rightarrow$ a \textit{is} b, para ver si dos objetos son el mismo. Si dos objetos son el mismo y son mutables, cambios en uno afectan a ambos. 
+	\item execfile('script.py')$\rightarrow$ ejecuta el script (si está en el Current Directory)
+	\end{itemize}

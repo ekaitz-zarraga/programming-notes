@@ -1,0 +1,52 @@
+\section{Ficheros}
+
+	\begin{itemize}
+	\item Para escribir: \\
+	\textit{f = open('nombre.txt','w') \# modo escribir \\
+	f.write('texto') \\
+	f.close() \# se crea el fichero}
+
+	\item Para leer: (se lee como string)\\ 
+	\textit{	f = open('nombre.txt')\\
+	string = f.read()}\\
+
+	\noindent Dos opciones:
+	\begin{tabbing}
+	---- \= ---- \= \kill  
+	\> \textit{string \# muestra el contenido}\\
+	\> \textit{print string \# muestra el contenido con formato}
+	\end{tabbing}
+
+	\item Para convertir cosas de un fichero en objetos Python, ejemplos:
+
+		\begin{enumerate}
+		\item \textbf{Strings}:\\
+		\textit{F = open('file.txt')\\
+		line = F.readline() \# lee línea \\ 
+		line.rstrip() \# quita \textbackslash n}
+
+		\item \textbf{Números}: '44,44,45 \textbackslash n' \\
+		\textit{F = open('file.txt')\\
+		line = F.readline() \# lee línea \\ 
+		parts = line.split\footnote{string.split('carácter')$\rightarrow$ convierte string en lista de palabras cortando por el carácter indicado. Para convertir lista en string: delimiter.join(lista) (delimiter es el carácter que une)}(',') \# parte por la coma, quedaría ['43','44','45\textbackslash n']\\
+		numbers = [int(P)] for P in parts \# convierte a número}
+
+		\item \textbf{Código}: '[1,2,3]\$\{'a':1, 'b':2 \}\textbackslash n'
+		\textit{F = open('file.txt')\\
+		line = F.readline() \# lee línea \\ 
+		parts = line.split('\$') \# parte por \$ \\
+		eval(parts[0]) \# convierte a cualquier tipo de objeto (trata como código)
+		\# objects = [eval(P) for P in parts] para coger todo. Queda [[1,2,3],{'a':1,'b':2}]}
+
+		\item \textbf{Pickle}:
+		Para el caso que \textit{eval()} no sea fiable, se puede usar el módulo \textit{pickle}:\\
+		\textit{F = open('file.txt','w')}\\
+		import picle \\
+		pickle.dump(D,F) \# coge cualquier objeto de la fila\\
+		F.close() \\
+		\end{enumerate}
+
+	\item Hay que poner \textbackslash n para saltar línea
+	\item Si no se cambia el path guarda los ficheros en C:\textbackslash Temp
+
+	\end{itemize}
