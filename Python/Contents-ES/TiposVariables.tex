@@ -1,0 +1,61 @@
+\section{Tipos de variables}
+
+	\subsection {Números}
+		\subsubsection {Enteros}
+			\begin{itemize}
+			\item Int. Trata cualquier nº sin .0 como entero (cuidado con la división)
+			\end{itemize}
+		\subsubsection {Reales}
+			\begin{itemize}
+			\item Float, coma flotante
+			\item Hay números complejos: a + bj (ver \ref{modulos})
+			\end{itemize}
+		\subsubsection {Booleans}
+			\begin{itemize}
+			\item Se definen los enteros 0 y 1 como True y False pero SIGUEN SIENDO enteros
+			\item Cualquier objeto diferente de 0 o que no esté vacío es True. Cualquier objeto igual a 0 o vacío es False
+			\item Operadores booleanos: $</>$ devuelven 0/1; \textit{and} y \textit{or} devuelven objeto\footnote{Es lo mismo porque pueden usarse objetos en \textit{if}s o \textit{while}s. Además, como \textit{or} devuelve objeto puede usarse para elegir un objeto no vacío/nulo de una lista: \textit{X = A or B or C or None}} (el primero que sea True), \textit{short circuit} 
+			\end{itemize}
+	\subsection {Strings} \label{strings}
+
+		\begin{itemize}
+		\item 	Se definen con comillas simples o dobles. Así pueden incluirse comillas simples/dobles en el propio string: ''Knight's'' // 'Knight''s' \footnote{'Knight\textbackslash's' es equivalente, \textbackslash funciona como tecla de escape. Para tabulaciones: \textbackslash t. Saltos de línea: \textbackslash n. Para ignorar las teclas de escape en las direcciones: \textit{open(r 'C:\...')}, (la \textit{r} ignora las teclas de escape) o \textit{'C:\textbackslash \textbackslash..'} (doble barra)}
+		
+		\item Se pueden usar comillas triples (' ' ' o '' '' '') para textos de más de una línea. Coge todo lo que haya entre las comillas, incluidos Enter o Tab. También para documentación (ver \ref{docstring}). Son útiles para desactivar trozos de código en lugar de comentar línea a línea con \#. 
+		\end{itemize}
+
+	\subsection {Listas}
+
+	\begin{itemize}
+	\item Colección de datos de cualquier tipo
+	\item Mutable
+	\item Definición $ \rightarrow $ lista =[...,...,...]
+	\item Los índices empiezan en cero: elemento nº 1 $\rightarrow$ lista[0]
+	\item Se pueden anidar listas para definir matrices: M=[[...,...],[...,...]] \footnote{Para definir matrices eficientemente usar Numpy} \textit{TRUCO:} Para coger \textit{columnas: col = [row[nº columna] for row in M]}
+	\item Se pueden convertir strings en listas con \textit{lista = list(string)}
+	\item Métodos útiles: \textit{lista.append}(elemento a añadir) añade elemento\footnote{CUIDADO: devuelve None, no asignar}
+	(más en \ref{metodos}) (!) Añade UN elemento: en el caso lista.append([1,2,3]) el elemento n+1 de lista será la lista [1,2,3]. Para que añada los elementos de una lista a otra lista: \textit{lista.extend([lista])} o lista1 + lista2 (maravillas del overload :D); \textit{extend} es más rápido porque sólo modifica una lista, no crea una nueva.  
+	\item Memoria: si se hace B = A, ambos hacen referencia al mismo objeto, si se cambia uno cambia los dos \footnote{Equivalente a \textit{static} en Java y C}. Para que esto no ocurra B = A[:] (hacen referencia a distinto lugar de la memoria) 
+	\item Para prealquilar memoria: L = [None] * 100 \# lista de 100 variables
+	\item Filtrado de listas: \textit{lista\_filtrada= [elem for elem in lista\_inicial if condición]} Si la condición es verdadera para un elemento, se incluye dicho elemento en la lista filtrada.
+	\end{itemize}	
+
+	\subsection {Tuples}
+	\begin{itemize}
+	\item Lista no mutable. Útil como etiqueta en diccionario(no se pueden usar listas) 
+	\item No tienen métodos
+	\item Tuple de un único elemento: (elem,) Hace falta la coma (en las listas no)
+	\item Tuple assigment: a,b = c,d
+	\end{itemize}
+
+	\subsection {Diccionarios}
+
+	\begin{itemize}
+	\item Colección de datos - etiquetas
+	\item Definición $ \rightarrow $ \textit{D ={'etiqueta1': valor1, ...}}
+	\item Las etiquetas pueden ser strings o tuples
+	\item Están desordenados, así que se busca por etiqueta: \textit{D[etiqueta]}
+	\item Se puede hacer uno vacío e ir rellenando. Se rellena igual que se busca.
+	\item Diccionarios para representar sparse matrix: D = {(tuple de coordenadas): valor} (lo demás 0). Ejemplo: {(2,3,4):88, (7,8,9):99} 
+	\item Métodos útiles: \textit{D.keys()} devuelve las etiquetas; \textit{D.haskey(etiqueta)} devuelve True si el diccionario tiene esa etiqueta; \textit{D.pop(elemento)} borra este elemento (también válido en listas) 
+	\end{itemize}

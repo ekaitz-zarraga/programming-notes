@@ -1,0 +1,34 @@
+\section{Módulos}\label{modulos}
+
+% QUÉ SON LOS MÓDULOS
+
+	\begin{itemize}
+	\item Dos modos para importar:
+
+		\begin{enumerate}
+			\item \textit{import módulo} 
+			\item \textit{from módulo import*}(para importar todo el módulo) o \textit{from módulo import función}. 
+		\end{enumerate}
+
+	La diferencia entre las dos es que para (2) se llama a las funciones por su nombre, sin especificar el módulo al que pertenecen; no distingue entre funciones con el mismo nombre, llama a la última importada (los métodos y atributos del método importado se sitúan en el espacio de nombres local). para el caso (1), en cambio, se llama a las funciones como: \textit{módulo.función()} \footnote{Se aconseja sólo importar un módulo con \textit{from modulo import*} en cada sesión para no tener problemas con funciones con el mismo nombre} 
+
+	\item Los módulos se crean igual que los scripts, sólo que en lugar de llamarlos hay que importarlos (según (1) o (2), sin .py)
+	\item Si se cambia un módulo hay que volverlo a cargar: \textit{reload(módulo)}
+
+	\item Módulos útiles:
+	\begin{itemize}
+		\item \textbf{Math}: funciones matemáticas ($\pi \rightarrow$ math.pi())
+		\item \textbf{Cmath}: módulo para funciones complejas (a.conjugate(), a.real(), a.imag() ...)
+		\item \textbf{Random}: números aleatorios reales o enteros, elegir de lista ...(nº random $\rightarrow$ random.random())
+		\item \textbf{Debugger}: pdb % MÁS
+		\item \textbf{Numpy}: módulo para tratar matrices eficientemente: \textit{array([[1,2],[3,4]])}(aquí la coma entre las dos listas representa salto de fila). Hay que instalarlo
+		\item \textbf{Scipy}: para funciones científicas. Hay que instalarlo.
+		\item \textbf{Pychecker}: para ver errores. Importarlo antes del módulo que se quiere verificar:\\
+		\textit{from} pychecker \textit{import} checker\\ \textit{import} módulo
+		\item \textbf{Timeit}: para medir tiempos: \textit{timeit.timeit('función')}
+		\item \textbf{cProfile}: para medir cuellos de botella. Ejecutarlo en el \textit{main} después de importarlo: \textit{cProfile.run('main()')}
+		\item \textbf{Matplotlib}: paquete para dibujar gráficos. Hay que descargarlo. 
+		\end{itemize}
+	\end{itemize}
+
+	\noindent Si un módulo tiene funciones y código y sólo se quieren importar las funciones y que no ejecute el código: \textit{if}\_\_name\_\_ = '\_\_main\_\_' después de la definición de clase/métodos. Así sólo se ejecuta lo del programa principal.

@@ -1,0 +1,10 @@
+# Ignore Latex auxiliary files
+*.backup
+*.out
+*.aux
+*.log
+*.toc
+*.gz
+*.log
+# Ignore Emacs backup
+*.md~
