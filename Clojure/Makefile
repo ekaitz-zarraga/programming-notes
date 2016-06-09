@@ -12,22 +12,12 @@ C 	= pandoc
 
 # Numbered sections and subsections
 FLAGS	= -N
-
-# Add table of contents
-FLAGS	+= --toc
-
-# Standalone output
-FLAGS	+= -s
-
-# Add some flag shit
-#FLAGS	+=
-
-
+FLAGS	+= --standalone
 
 # SPANISH TARGET
 #-------------------------------------------------------------------------
 TARGET_ES = Clojure-ES.pdf
-CONTENTS_ES = $(sort $(wildcard Contents-ES/*.md))
+CONTENTS_ES = $(sort $(wildcard Contents-ES/*))
 
 # Add PDF related FLAGS
 PDF_FLAGS 	= --latex-engine=xelatex
@@ -35,8 +25,15 @@ PDF_FLAGS 	= --latex-engine=xelatex
 .PHONY: spanish
 spanish: $(TARGET_ES)
 
-$(TARGET_PDF): $(SECTIONS)
-	$(C) $(FLAGS) -o $@ $(CONTENTS_ES) $(PDF_FLAGS)
+$(TARGET_ES): $(CONTENTS_ES)
+	$(C) \
+		$(FLAGS) 			\
+		-f markdown			\
+		--template=template.latex	\
+		-o $@				\
+		$(CONTENTS_ES)			\
+		--data-dir=.			\
+		$(PDF_FLAGS)
 
 
 # ALL TARGET
